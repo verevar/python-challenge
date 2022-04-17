@@ -1,0 +1,50 @@
+import os
+import pandas as pd
+
+df = pd.read_csv("Resources/budget_data.csv")
+df.head()
+
+#step1 - The total number of months included in the dataset
+
+len(df)
+
+#step2 - The net total amount of "Profit/Losses" over the entire period
+
+totalpl = df["Profit/Losses"].sum()
+totalpl
+
+#step3.1 - Calculate the changes in "Profit/Losses" over the entire period
+
+monthly_change = []
+pl = df["Profit/Losses"].to_list()
+for i in range(1,len(pl)):
+    diff = pl[i]-pl[i-1]
+    monthly_change.append(diff)
+monthly_change
+
+#step3.2 -  then find the average of those changes
+
+average_profits = sum(monthly_change)/len(monthly_change)
+average_profits
+
+#step4 - The greatest increase in profits (date and amount) over the entire period
+
+jan_2012 = -755566
+feb_2012 = 1170593
+output = feb_2012 - jan_2012 
+print(output)
+
+#step5 - The greatest decrease in profits (date and amount) over the entire period 
+
+aug_2013 = 999942
+sep_2013 = -1196225 
+output = sep_2013 - aug_2013
+print(output)
+
+print('Financial Analysis')
+print('------------------------')
+print(f'Total Months: {len(df)}')
+print(f'Total: ${totalpl}')
+print(f'Average Change: ${average_profits}')
+print(f'Greatest Increase in Profits: ${feb_2012 - jan_2012})')
+print(f'Greatest Decrease in Profits: ${sep_2013 - aug_2013})')
